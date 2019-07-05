@@ -1,19 +1,21 @@
 const axios = require('axios');
 const sha256 = require('js-sha256');
-const uuidv4 = require('uuid/v4');
+const uuidv1 = require('uuid/v1');
 const moment = require('moment');
 const { secret, apiKey } = require('../private/letterboxd');
 
-const lbRequest = async ( { filmId } ) => {
-    const uniqueId = uuidv4();
+const lbRequest = async ( { filmId, type, request } ) => {
+    const uniqueId = uuidv1();
     const timeStamp = moment().unix();
 
     const base = `https://api.letterboxd.com/api/v0/`;
-    const endpoint = `film/${filmId}`;
+    const endpoint = `${request}`;
     const api = `apikey=${apiKey}`;
     const nonce = `nonce=${uniqueId}`;
     const timestamp = `timestamp=${timeStamp}`;
-    const url = `${base}${endpoint}?${api}&${nonce}&${timestamp}`;
+    const questionMarkCheck = endpoint.indexOf('?') === -1 ? '?' : '&';
+    const requiredParams = `${api}&${nonce}&${timestamp}`;
+    const url = `${base}${endpoint}${questionMarkCheck}${requiredParams}`;
 
     const method = 'GET';
     const body = '';
