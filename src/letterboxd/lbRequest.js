@@ -2,7 +2,7 @@ const axios = require('axios');
 const sha256 = require('js-sha256');
 const uuidv1 = require('uuid/v1');
 const moment = require('moment');
-const { secret, apiKey } = require('../private/letterboxd');
+const { secret, apiKey } = require('../../private/letterboxd');
 
 const lbRequest = async ( { filmId, type, request } ) => {
     const uniqueId = uuidv1();
