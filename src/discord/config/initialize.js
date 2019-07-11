@@ -1,4 +1,4 @@
-const { token, prefix } = require('../../private/discordConfig');
+const { token, prefix } = require('../../../private/discordConfig');
 const Discord = require("discord.js");
 const client = new Discord.Client();
 

@@ -1,4 +1,4 @@
-const endpointRoutes = require('../letterboxd/endpointRouter');
+const endpointRoutes = require('../../letterboxd/endpointRouter');
 
 module.exports = () => {
     const commands = Object.keys(endpointRoutes).reduce((commands, endpoint) => {

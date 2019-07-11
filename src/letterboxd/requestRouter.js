@@ -1,5 +1,5 @@
 const lbRequest = require('./lbRequest');
-const genres = require('../data/genres');
+// const genres = require('../data/genres');
 const FastAverageColor = require('fast-average-color');
 const { loadImage } = require('canvas');
 var ColorThief = require('color-thief');
@@ -8,6 +8,8 @@ var colorThief = new ColorThief();
 const requestRouter = async ({ type }, { textOnly: text, id, genre, decade, year }) => {
     try {
         switch (type) {
+            case "TEST": 
+                return;
             // case "FILM_INDIVIDUAL_ID":
             //     const response = await lbRequest({ request: `film/${id}` });
             //     const { name } = response.data;
@@ -35,8 +37,15 @@ const requestRouter = async ({ type }, { textOnly: text, id, genre, decade, year
             case "FILM_INDIVIDUAL_AUTOCOMPLETE":
                 const finalEndPointAuto = `search?input=${text}&searchMethod=Autocomplete&include=FilmSearchItem`;
                 const filmsResponseAuto = await lbRequest({ request: finalEndPointAuto });
-                const firstFilm = filmsResponseAuto.data.items[0].film
-                const { name, releaseYear, originalName } = firstFilm;
+                const firstFilm = filmsResponseAuto.data.items[0].film;
+                const { name, releaseYear, originalName, id } = firstFilm;
+                // const filmsResponseId = await lbRequest({ request: `films`, id });
+                console.log(id);
+                const filmsResponseId = await lbRequest({ request: `film/${id}` });
+                console.log(filmsResponseId.data);
+                // genres
+                // contributions
+                // const { description, runtime } = filmsResponseId;
                 const directorsString = firstFilm.directors.reduce((directors, director) => {
                     return `${directors} ${directors.length > 0 ? "," : ""}${director.name }`
                 }, "").trim();

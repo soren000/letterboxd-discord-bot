@@ -1,5 +1,5 @@
-const { client, prefix } = require('./initialize');
-const commands = require('./commandsArray')();
+const { client, prefix } = require('./config/initialize');
+const commands = require('./data/commandsArray')();
 console.log(commands);
 
 module.exports = async (message) => {
